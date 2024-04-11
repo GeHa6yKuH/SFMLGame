@@ -5,7 +5,7 @@ sf::Texture background::texture;
 
 background::background(float x, float y) : entity() {
 	// Load the texture
-	texture.loadFromFile("sprite.jpg");
+	texture.loadFromFile("space.png");
 	sprite.setTexture(texture);
 
 	// Set the initial position and velocity of the background
