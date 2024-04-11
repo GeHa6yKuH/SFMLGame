@@ -15,6 +15,7 @@ struct constants {
 	static constexpr int brick_HP{ 3 };
 	static constexpr int brick_columns{10};
 	static constexpr int brick_raws{4};
+	static constexpr int player_lives{3};
 };
 
 #endif // !CONSTANTS_H

@@ -51,7 +51,7 @@ void ball::update() {
     if (y() < 0)
         velocity.y = -velocity.y;
     if (y() > constants::window_height)
-        velocity.y = -velocity.y;
+        destroy();
 }
 
 void ball::draw(sf::RenderWindow& window) {
