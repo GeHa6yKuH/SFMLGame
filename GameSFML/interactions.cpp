@@ -1,4 +1,5 @@
 #include "interactions.h"
+#include "game.h"
 
 bool is_interacting(const entity& e1, const entity& e2)
 {
@@ -7,23 +8,17 @@ bool is_interacting(const entity& e1, const entity& e2)
 	return box1.intersects(box2);
 }
 
-void handle_collisions(ball& b, const paddle& p)
+bool handle_collisions(ball& b, const paddle& p)
 {
 	if (is_interacting(b, p))
 	{
 		b.move_up();
-
-		if (b.x() < p.x())
-		{
-			b.move_left();
-		}
-		else {
-			b.move_right();
-		}
+		return true;
 	}
+	return false;
 }
 
-void handle_collisions(ball& ball, brick& brick)
+bool handle_collisions(ball& ball, brick& brick, bool& destroyedBrick)
 {
 	if (is_interacting(brick, ball))
 	{
@@ -31,6 +26,7 @@ void handle_collisions(ball& ball, brick& brick)
 
 		if (brick.is_too_weak())
 		{
+			destroyedBrick = true;
 			brick.destroy();
 		}
 
@@ -61,5 +57,17 @@ void handle_collisions(ball& ball, brick& brick)
 				ball.move_down();
 			}
 		}
+		return true;
 	}
+	return false;
+}
+
+bool handle_collisions(bonus& b, paddle& p)
+{
+	if (is_interacting(b, p))
+	{
+		b.destroy();
+		return true;
+	}
+	return false;
 }

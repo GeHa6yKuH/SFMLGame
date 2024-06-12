@@ -134,7 +134,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="aimItem.cpp" />
     <ClCompile Include="ball.cpp" />
+    <ClCompile Include="bonus.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="interactions.cpp" />
@@ -144,8 +146,10 @@
     <ClCompile Include="brick.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="aimItem.h" />
     <ClInclude Include="background.h" />
     <ClInclude Include="ball.h" />
+    <ClInclude Include="bonus.h" />
     <ClInclude Include="brick.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="Entity.h" />

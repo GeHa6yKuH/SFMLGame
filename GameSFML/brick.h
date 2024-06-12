@@ -14,6 +14,8 @@ private:
 
 	int brick_HP = constants::brick_HP;
 
+	float xA, yA;
+
 public:
 
 	brick(float x, float y);
@@ -24,6 +26,9 @@ public:
 
 	void update() override;
 	void draw(sf::RenderWindow& window) override;
+
+	float GetxA() const { return xA; }
+	float GetyA() const { return yA; }
 };
 
 #endif // !BRICK_H

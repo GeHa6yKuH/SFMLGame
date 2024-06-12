@@ -23,6 +23,9 @@ bool brick::is_too_weak() const noexcept
 
 brick::brick(float x, float y)
 {
+	xA = x;
+	yA = y;
+
 	texture.loadFromFile("brick.png");
 	sprite.setTexture(texture);
 

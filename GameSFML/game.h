@@ -9,10 +9,12 @@
 
 #include "background.h"
 #include "ball.h"
+#include "bonus.h"
 #include "brick.h"
 #include "constants.h"
 #include "entity.h"
 #include "paddle.h"
+#include "aimItem.h"
 
 // A class to manage the entities in the game
 // It stores the entities in a vector of std::unique_ptr
@@ -42,6 +44,7 @@ class entity_manager {
 	// Do not delete these pointers!
 	// Do not use them after the objects they point to have been destroyed!
 	std::map<size_t, entity_alias_vector> grouped_entities;
+
 public:
 	// Function to create an entity object of type T using args as the constructor arguments
 	// We use a variadic template to pass any number of arguments
@@ -90,8 +93,8 @@ public:
 	void apply_all(const Func& func) {
 		auto& entity_group{ get_all<T>() };
 
-		for (auto ptr : entity_group)
-			func(*dynamic_cast<T*>(ptr));
+		for (rsize_t i = 0; i < entity_group.size(); i++)
+			func(*dynamic_cast<T*>(entity_group[i]), i);
 	}
 
 	// Function to update all the entities
@@ -110,25 +113,43 @@ class game {
 	// and an std::string with the window title
 	// The SFML code is in the sf namespace
 	sf::RenderWindow game_window{ {constants::window_width, constants::window_height},
-		"Simple Breakout Game Version 10" };
+		"Simple Brick Destroy Game" };
 
 	// Instead of embedding every entity in the game class, use an entity_manager
 	entity_manager manager;
 
 	sf::Font verdana;
-	sf::Text text_state, text_lives;
+	sf::Text text_state, text_lives, text_points;
 
 	// Member to store the current state of the game
 	game_state state{ game_state::running };
 
 	int lives{ constants::player_lives };
+
+	int points{ 0 };
+
+	class ball gameBall { 0.f, 0.f };
+
+	class paddle gamePaddle { 0.f, 0.f };
+
+	class background gameBackground { 0.f, 0.f };
+
+	bool areAimingItemsDestroyed = false;
+
+protected:
+
+	void createAimingItems();
+
 public:
 	game();
+
 	// (Re)initialize the game
 	void reset();
 
 	// (Re)start the game
 	void run();
+
+	void looseLife();
 };
 
 #endif // GAME_H

@@ -40,6 +40,8 @@ public:
 
 	// Virtual destructor
 	virtual ~entity() {}
+
+	sf::Sprite* getSprite() { return &sprite; }
 };
 
 // Abstract base class to represent graphical entities which can move around the screen
@@ -56,10 +58,10 @@ public:
 	virtual void move_left() noexcept = 0;
 	virtual void move_right() noexcept = 0;
 
-	// Pure virtual functions inherited from parent class
-	// virtual void update() = 0;
-	// virtual void draw(sf::RenderWindow& window) = 0;
-	// etc
+	sf::Vector2f getVelocity() const { return velocity; }
+
+	void setVelocity(sf::Vector2f newVel) { velocity = newVel; }
+	
 };
 
 #endif // ENTITY_H

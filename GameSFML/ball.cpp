@@ -10,8 +10,14 @@ ball::ball(float x, float y) : moving_entity() {
 
     // Set the initial position and velocity of the ball
     // Use (x, y) for the initial position of the ball
-    sprite.setPosition(x, y);
-    velocity = { constants::ball_speed, constants::ball_speed };
+
+    xA = x;
+    yA = y;
+
+    sprite.setPosition(xA, yA);
+
+    // set initial velocity of the ball
+    velocity = { 0.f , -constants::ball_speed };
 
     sprite.setOrigin(get_centre());
 }
@@ -35,7 +41,27 @@ void ball::move_down() noexcept {
 // Compute the ball's new position
 void ball::update() {
     // Move the position of the ball
-    sprite.move(velocity);
+    if (!isFixed)
+    {
+        sprite.move(velocity);
+    }
+
+    if (isFixed)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left))
+        {
+            velocity.x -= 0.5f;
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
+        {
+            velocity.x += 0.5f;
+        }
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && isFixed) 
+    {
+        isFixed = false;
+    }
 
     // We check if the ball has moved off the left hand side of the window
     // If so, we change sign of the x-component of the velocity

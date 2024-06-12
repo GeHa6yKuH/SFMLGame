@@ -6,11 +6,14 @@
 #include "ball.h"
 #include "paddle.h"
 #include "brick.h"
+#include "bonus.h"
 
 bool is_interacting(const entity& e1, const entity& e2);
 
-void handle_collisions(ball& b, const paddle& p);
+bool handle_collisions(ball& b, const paddle& p);
 
-void handle_collisions(ball& b, brick& br);
+bool handle_collisions(ball& b, brick& br, bool& destroyedBrick);
+
+bool handle_collisions(bonus& b, paddle& p);
 
 #endif
