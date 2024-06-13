@@ -68,4 +68,4 @@ Download Precompiled Binaries
 
 Feel free to explore, modify, and have fun with the game! If you encounter any issues or have suggestions, please open an issue or submit a pull request. Happy gaming!
 
-!game_image.png
+![gameimg](game_image.png)
