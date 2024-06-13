@@ -67,3 +67,5 @@ If you prefer not to build the game from source, you can download the precompile
 Download Precompiled Binaries
 
 Feel free to explore, modify, and have fun with the game! If you encounter any issues or have suggestions, please open an issue or submit a pull request. Happy gaming!
+
+!game_image.png
