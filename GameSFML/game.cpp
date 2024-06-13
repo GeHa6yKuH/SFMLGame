@@ -53,13 +53,13 @@ game::game() {
 
 	// Configure our text objects
 	text_state.setFont(verdana);
-	text_state.setPosition(constants::window_width / 2.0f - 125.0f, constants::window_height / 2.0f - 100.0f);
+	text_state.setPosition(constants::window_width / 2.0f - 100.0f, constants::window_height / 2.0f - 100.0f);
 	text_state.setCharacterSize(35);
 	text_state.setFillColor(sf::Color::White);
 	text_state.setString("Paused");
 
 	text_lives.setFont(verdana);
-	text_lives.setPosition(constants::window_width / 2.0f - 90.0f, constants::window_height / 2.0f - 50.0f);
+	text_lives.setPosition(constants::window_width / 2.0f - 65.0f, constants::window_height / 2.0f - 50.0f);
 	text_lives.setCharacterSize(35);
 	text_lives.setFillColor(sf::Color::White);
 	text_lives.setString("Lives: " + std::to_string(lives));
@@ -69,6 +69,18 @@ game::game() {
 	text_points.setCharacterSize(15);
 	text_points.setFillColor(sf::Color::White);
 	text_points.setString("Points: " + std::to_string(points));
+
+	text_instructions.setFont(verdana);
+	text_instructions.setPosition(constants::window_width / 4, constants::window_height / 3);
+	text_instructions.setCharacterSize(15);
+	text_instructions.setFillColor(sf::Color::Cyan);
+	text_instructions.setString("Aim and press Space to launch the ball!");
+
+	text_pauseinstructions.setFont(verdana);
+	text_pauseinstructions.setPosition(constants::window_width / 3.5, constants::window_height / 1.4);
+	text_pauseinstructions.setCharacterSize(15);
+	text_pauseinstructions.setFillColor(sf::Color::Cyan);
+	text_pauseinstructions.setString("Press P to continue the game!");
 }
 
 // (Re)initialize the game
@@ -83,7 +95,7 @@ void game::reset() {
 
 	gameBackground = manager.create<background>(0.0f, 0.0f);
 	gameBall = manager.create<ball>(constants::window_width / 2.0f, constants::window_height - 50.f);
-	gamePaddle = manager.create<paddle>(constants::window_width / 2.0f - 40.f, constants::window_height - constants::paddle_heigh);
+	gamePaddle = manager.create<paddle>(constants::window_width / 2.f - constants::paddle_width / 2.f, constants::window_height - constants::paddle_heigh);
 
 	for (int i = 0; i < constants::brick_columns; ++i) {
 		for (int j = 0; j < constants::brick_raws; ++j) {
@@ -125,7 +137,7 @@ void game::looseLife() {
 	gameBall = manager.create<ball>(constants::window_width / 2.0f, constants::window_height - 50.f);
 	// todo: return paddle to the centre! 
 	manager.apply_all<paddle>([this](auto& the_paddle, size_t index) {
-			the_paddle.getSprite()->setPosition(constants::window_width / 2.0f - 40.f, constants::window_height - constants::paddle_heigh);
+			the_paddle.getSprite()->setPosition(constants::window_width / 2.0f - constants::paddle_width / 2.f, constants::window_height - constants::paddle_heigh);
 		});
 	gameBall.setIsFixed(true);
 	--lives;
@@ -178,10 +190,10 @@ void game::run() {
 			reset();
 		}
 
-		if (state == game_state::paused)
+		/*if (state == game_state::paused)
 		{
 			manager.draw(game_window);
-		}
+		}*/
 
 		if (state != game_state::running)
 		{
@@ -201,7 +213,7 @@ void game::run() {
 
 			game_window.draw(text_state);
 			game_window.draw(text_lives);
-			game_window.draw(text_points);
+			game_window.draw(text_pauseinstructions);
 		}
 		else {
 			// If there are no remaining balls on the screen
@@ -312,6 +324,11 @@ void game::run() {
 
 			// Display the updated graphics
 			manager.draw(game_window);
+
+			if (gameBall.getIsFixed())
+			{
+				game_window.draw(text_instructions);
+			}
 		}
 		game_window.draw(text_points);
 		game_window.display();

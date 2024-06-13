@@ -2,14 +2,17 @@
 
 sf::Texture bonus::texture;
 
+const sf::Color lightGreen{ 128, 255, 128, 255 };
+
 bonus::bonus(float x, float y) : moving_entity() {
     // Load the texture
-    texture.loadFromFile("ball.png");
+    texture.loadFromFile("bonus.png");
     sprite.setTexture(texture);
 
     // Set the initial position and velocity of the ball
     // Use (x, y) for the initial position of the ball
     sprite.setPosition(x, y);
+    sprite.setColor(lightGreen);
     velocity = { 0.f , constants::bonus_speed };
 
     sprite.setOrigin(get_centre());

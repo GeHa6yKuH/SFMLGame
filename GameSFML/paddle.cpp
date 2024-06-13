@@ -24,7 +24,7 @@ void paddle::update() {
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
     {
-        velocity = x() <= constants::window_width - 90.f ? sf::Vector2f(6.f, 0.f) : sf::Vector2f(0.f, 0.f);
+        velocity = x() <= constants::window_width - 70.f ? sf::Vector2f(6.f, 0.f) : sf::Vector2f(0.f, 0.f);
     }
     else
     {

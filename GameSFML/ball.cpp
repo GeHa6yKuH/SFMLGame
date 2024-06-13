@@ -48,11 +48,11 @@ void ball::update() {
 
     if (isFixed)
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left) && velocity.x > -constants::ball_maxX_velocity)
         {
             velocity.x -= 0.5f;
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right) && velocity.x < constants::ball_maxX_velocity)
         {
             velocity.x += 0.5f;
         }
