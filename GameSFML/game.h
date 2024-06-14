@@ -119,7 +119,7 @@ class game {
 	entity_manager manager;
 
 	sf::Font verdana;
-	sf::Text text_state, text_lives, text_points, text_instructions, text_pauseinstructions;
+	sf::Text text_state, text_lives, text_points, text_instructions, text_pauseinstructions, text_pointsstatement;
 
 	// Member to store the current state of the game
 	game_state state{ game_state::running };
@@ -150,6 +150,8 @@ public:
 	void run();
 
 	void looseLife();
+
+	void setAndDrawResetWindow();
 };
 
 #endif // GAME_H

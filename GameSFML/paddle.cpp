@@ -10,8 +10,8 @@ paddle::paddle(float x, float y) : moving_entity() {
     xA = x;
     yA = y;
 
-    // Set the initial position and velocity of the ball
-    // Use (x, y) for the initial position of the ball
+    sprite.setScale(1.2f, 1.f);
+
     sprite.setPosition(xA, yA);
     /*velocity = { constants::ball_speed, constants::ball_speed };*/
 }
@@ -24,7 +24,7 @@ void paddle::update() {
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
     {
-        velocity = x() <= constants::window_width - 70.f ? sf::Vector2f(6.f, 0.f) : sf::Vector2f(0.f, 0.f);
+        velocity = x() <= constants::window_width - constants::paddle_width ? sf::Vector2f(6.f, 0.f) : sf::Vector2f(0.f, 0.f);
     }
     else
     {

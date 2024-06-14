@@ -53,13 +53,13 @@ game::game() {
 
 	// Configure our text objects
 	text_state.setFont(verdana);
-	text_state.setPosition(constants::window_width / 2.0f - 100.0f, constants::window_height / 2.0f - 100.0f);
+	text_state.setPosition(constants::window_width / 2.0f - 150.0f, constants::window_height / 2.0f - 100.0f);
 	text_state.setCharacterSize(35);
 	text_state.setFillColor(sf::Color::White);
 	text_state.setString("Paused");
 
 	text_lives.setFont(verdana);
-	text_lives.setPosition(constants::window_width / 2.0f - 65.0f, constants::window_height / 2.0f - 50.0f);
+	text_lives.setPosition(constants::window_width / 2.0f - 115.0f, constants::window_height / 2.0f - 50.0f);
 	text_lives.setCharacterSize(35);
 	text_lives.setFillColor(sf::Color::White);
 	text_lives.setString("Lives: " + std::to_string(lives));
@@ -77,10 +77,16 @@ game::game() {
 	text_instructions.setString("Aim and press Space to launch the ball!");
 
 	text_pauseinstructions.setFont(verdana);
-	text_pauseinstructions.setPosition(constants::window_width / 3.5, constants::window_height / 1.4);
+	text_pauseinstructions.setPosition(constants::window_width / 3.5f, constants::window_height / 1.4f);
 	text_pauseinstructions.setCharacterSize(15);
 	text_pauseinstructions.setFillColor(sf::Color::Cyan);
 	text_pauseinstructions.setString("Press P to continue the game!");
+
+	text_pointsstatement.setFont(verdana);
+	text_pointsstatement.setPosition(constants::window_width / 2.0f - 115.0f, constants::window_height / 2.0f);
+	text_pointsstatement.setCharacterSize(35);
+	text_pointsstatement.setFillColor(sf::Color::White);
+	text_pointsstatement.setString("Earned points: " + std::to_string(points));
 }
 
 // (Re)initialize the game
@@ -133,9 +139,7 @@ void game::createAimingItems()
 }
 
 void game::looseLife() {
-	// Spawn a new one and reduce the player's remaining lives
 	gameBall = manager.create<ball>(constants::window_width / 2.0f, constants::window_height - 50.f);
-	// todo: return paddle to the centre! 
 	manager.apply_all<paddle>([this](auto& the_paddle, size_t index) {
 			the_paddle.getSprite()->setPosition(constants::window_width / 2.0f - constants::paddle_width / 2.f, constants::window_height - constants::paddle_heigh);
 		});
@@ -143,6 +147,15 @@ void game::looseLife() {
 	--lives;
 
 	state = game_state::paused;
+}
+
+void game::setAndDrawResetWindow() {
+	text_pointsstatement.setString("Earned points: " + std::to_string(points));
+	text_pauseinstructions.setString("Press R to reset the game!");
+	game_window.draw(text_state);
+	game_window.draw(text_lives);
+	game_window.draw(text_pauseinstructions);
+	game_window.draw(text_pointsstatement);
 }
 
 // (Re)start the game
@@ -172,7 +185,7 @@ void game::run() {
 
 		// If the user presses "P", we pause/unpause the game
 		// To prevent repeated use, we ignore it if it was pressed on the last iteration
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P) && state != game_state::game_over && state != game_state::player_wins) {
 			// If it was not pressed on the last iteration, toggle the status
 			if (!pause_key_active) {
 				if (state == game_state::paused)
@@ -190,30 +203,27 @@ void game::run() {
 			reset();
 		}
 
-		/*if (state == game_state::paused)
-		{
-			manager.draw(game_window);
-		}*/
-
 		if (state != game_state::running)
 		{
 			switch (state) {
 			case game_state::paused:
 				text_state.setString("   Paused   ");
+				text_pauseinstructions.setString("Press P to continue the game!");
+				game_window.draw(text_state);
+				game_window.draw(text_lives);
+				game_window.draw(text_pauseinstructions);
 				break;
 			case game_state::game_over:
 				text_state.setString("   Game over!   ");
+				setAndDrawResetWindow();
 				break;
 			case game_state::player_wins:
-				text_state.setString("   You won nothing!   ");
+				text_state.setString("   You won!   ");
+				setAndDrawResetWindow();
 				break;
 			default:
 				break;
 			}
-
-			game_window.draw(text_state);
-			game_window.draw(text_lives);
-			game_window.draw(text_pauseinstructions);
 		}
 		else {
 			// If there are no remaining balls on the screen
