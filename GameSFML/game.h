@@ -121,6 +121,13 @@ class game {
 	sf::Font verdana;
 	sf::Text text_state, text_lives, text_points, text_instructions, text_pauseinstructions, text_pointsstatement;
 
+	sf::SoundBuffer s_buffer;
+	sf::Sound game_won_sound;
+
+	sf::Music bg_music;
+
+	bool soundPlayed{ false };
+
 	// Member to store the current state of the game
 	game_state state{ game_state::running };
 

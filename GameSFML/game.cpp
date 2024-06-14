@@ -87,6 +87,19 @@ game::game() {
 	text_pointsstatement.setCharacterSize(35);
 	text_pointsstatement.setFillColor(sf::Color::White);
 	text_pointsstatement.setString("Earned points: " + std::to_string(points));
+
+
+	if (s_buffer.loadFromFile("game_won.wav"))
+	{
+		game_won_sound.setBuffer(s_buffer);
+		game_won_sound.setVolume(25.f);
+	}
+
+	if (bg_music.openFromFile("background_music.mp3"))
+	{
+		bg_music.play();
+		bg_music.setLoop(true);
+	}
 }
 
 // (Re)initialize the game
@@ -218,6 +231,11 @@ void game::run() {
 				setAndDrawResetWindow();
 				break;
 			case game_state::player_wins:
+				if (!soundPlayed)
+				{
+					game_won_sound.play();
+					soundPlayed = true;
+				}
 				text_state.setString("   You won!   ");
 				setAndDrawResetWindow();
 				break;

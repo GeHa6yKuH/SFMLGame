@@ -1,11 +1,23 @@
 #include "paddle.h"
 
+#include <iostream>
+
 sf::Texture paddle::texture;
 
 paddle::paddle(float x, float y) : moving_entity() {
     // Load the texture
     texture.loadFromFile("paddle.png");
     sprite.setTexture(texture);
+
+    if (s_buffer.loadFromFile("ball_bounces_paddle.wav"))
+    {
+        sound.setBuffer(s_buffer);
+    }
+
+    if (s_buffer1.loadFromFile("catch_bonus.wav"))
+    {
+        sound1.setBuffer(s_buffer1);
+    }
 
     xA = x;
     yA = y;

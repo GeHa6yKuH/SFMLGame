@@ -8,11 +8,12 @@ bool is_interacting(const entity& e1, const entity& e2)
 	return box1.intersects(box2);
 }
 
-bool handle_collisions(ball& b, const paddle& p)
+bool handle_collisions(ball& b, paddle& p)
 {
 	if (is_interacting(b, p))
 	{
 		b.move_up();
+		p.playSound();
 		return true;
 	}
 	return false;
@@ -23,9 +24,11 @@ bool handle_collisions(ball& ball, brick& brick, bool& destroyedBrick)
 	if (is_interacting(brick, ball))
 	{
 		brick.weaken();
+		ball.playSound();
 
 		if (brick.is_too_weak())
 		{
+			brick.playSound();
 			destroyedBrick = true;
 			brick.destroy();
 		}
@@ -66,6 +69,7 @@ bool handle_collisions(bonus& b, paddle& p)
 {
 	if (is_interacting(b, p))
 	{
+		p.playSound1();
 		b.destroy();
 		return true;
 	}

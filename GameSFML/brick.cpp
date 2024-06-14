@@ -29,6 +29,11 @@ brick::brick(float x, float y)
 	texture.loadFromFile("brick.png");
 	sprite.setTexture(texture);
 
+	/*if (s_buffer.loadFromFile("brick_destroyed.wav"))
+	{
+		sound.setBuffer(s_buffer);
+	}*/
+
 	sprite.setPosition(x, y);
 	sprite.setOrigin(get_centre());
 }

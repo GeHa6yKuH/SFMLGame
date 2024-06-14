@@ -16,6 +16,11 @@ ball::ball(float x, float y) : moving_entity() {
 
     sprite.setPosition(xA, yA);
 
+    if (s_buffer.loadFromFile("ball_bounces_paddle.wav"))
+    {
+        sound.setBuffer(s_buffer);
+    }
+
     // set initial velocity of the ball
     velocity = { 0.f , -constants::ball_speed };
 

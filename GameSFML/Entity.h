@@ -4,11 +4,21 @@
 #define ENTITY_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 // Abstract base class to represent any graphical entity on the screen
 class entity {
 protected:
+
 	sf::Sprite sprite;
+
+	sf::Sound sound;
+	sf::Sound sound1;
+	sf::Sound sound2;
+
+	sf::SoundBuffer s_buffer;
+	sf::SoundBuffer s_buffer1;
+	sf::SoundBuffer s_buffer2;
 
 	bool destroyed{ false };
 
@@ -42,6 +52,10 @@ public:
 	virtual ~entity() {}
 
 	sf::Sprite* getSprite() { return &sprite; }
+
+	void playSound() { sound.play(); }
+	void playSound1() { sound1.play(); }
+	void playSound2() { sound2.play(); }
 };
 
 // Abstract base class to represent graphical entities which can move around the screen

@@ -10,7 +10,7 @@
 
 bool is_interacting(const entity& e1, const entity& e2);
 
-bool handle_collisions(ball& b, const paddle& p);
+bool handle_collisions(ball& b, paddle& p);
 
 bool handle_collisions(ball& b, brick& br, bool& destroyedBrick);
 
