@@ -44,10 +44,11 @@ Here you can find a detailed explanation of setting up the game on Windows:
         sfml-graphics.lib
         sfml-window.lib
         sfml-system.lib
+        sfml-audio.lib
         ```
 5. **Build the Solution:** Build the project in your IDE.
 6. **Move Assets and DLLs:**
-    - Move all .png files from the main directory to GameSFML/x64/Release.
+    - Move all .png, .wav and .mp3 files from the main directory to GameSFML/x64/Release.
     - Copy all .dll files YOUR DOWNLOADED SFML folder's bin directory to GameSFML/x64/Release.
 7. **Run the Game:**
     - Navigate to GameSFML/x64/Release.
