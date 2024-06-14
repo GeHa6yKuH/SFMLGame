@@ -16,7 +16,12 @@ Welcome to my classic brick-breaking game developed using C++ and the SFML libra
 - Destroy all the bricks and earn points to win the game
 
 ## Installation
-To set up the game locally, follow these steps:
+
+The installation process will highly depend on operating system you are using,
+since SFML library uses platform specific implementations (like DLL files on Windows,
+shared objects on Linux and SFML frameworks on MacOS)
+
+Here you can find a detailed explanation of setting up the game on Windows:
 
 1. **Clone the Repository:**
     ```bash
