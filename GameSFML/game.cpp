@@ -95,9 +95,15 @@ game::game() {
 		game_won_sound.setVolume(25.f);
 	}
 
+	if (s_buffer_lose.loadFromFile("game_over.wav"))
+	{
+		game_lost_sound.setBuffer(s_buffer_lose);
+	}
+
 	if (bg_music.openFromFile("background_music.mp3"))
 	{
 		bg_music.play();
+		bg_music.setVolume(10.f);
 		bg_music.setLoop(true);
 	}
 }
@@ -111,6 +117,8 @@ void game::reset() {
 
 	// Destroy all the entities and re-create them
 	manager.clear();
+
+	soundPlayed = false;
 
 	gameBackground = manager.create<background>(0.0f, 0.0f);
 	gameBall = manager.create<ball>(constants::window_width / 2.0f, constants::window_height - 50.f);
@@ -227,6 +235,11 @@ void game::run() {
 				game_window.draw(text_pauseinstructions);
 				break;
 			case game_state::game_over:
+				if (!soundPlayed)
+				{
+					game_lost_sound.play();
+					soundPlayed = true;
+				}
 				text_state.setString("   Game over!   ");
 				setAndDrawResetWindow();
 				break;

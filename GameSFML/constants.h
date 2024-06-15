@@ -10,7 +10,7 @@ struct constants {
 	static constexpr int ball_maxX_velocity{ 8 };
 	static constexpr float aim_offset{ 5.f };
 	static constexpr float ball_speed{ 5.f };
-	static constexpr float bonus_speed{ 4.0f };
+	static constexpr float bonus_speed{ 2.5f };
 	static constexpr float paddle_width{ 84.f };
 	static constexpr float paddle_heigh{ 40.f };
 	static constexpr float brick_width{ 43.f };

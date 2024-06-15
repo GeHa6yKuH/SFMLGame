@@ -122,7 +122,11 @@ class game {
 	sf::Text text_state, text_lives, text_points, text_instructions, text_pauseinstructions, text_pointsstatement;
 
 	sf::SoundBuffer s_buffer;
+	sf::SoundBuffer s_buffer_lose;
+
+
 	sf::Sound game_won_sound;
+	sf::Sound game_lost_sound;
 
 	sf::Music bg_music;
 
