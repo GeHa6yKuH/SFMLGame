@@ -14,7 +14,7 @@ background::background(float x, float y) : entity() {
 }
 
 // Compute the background's new position
-void background::update() {
+void background::update(float DeltaTime) {
 	// Nothing to do here
 }
 

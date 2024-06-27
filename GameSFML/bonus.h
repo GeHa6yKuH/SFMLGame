@@ -24,7 +24,7 @@ public:
 	bonus(float x, float y);
 
 	// Implement the pure virtual functions
-	void update() override;
+	void update(float DeltaTime) override;
 	void draw(sf::RenderWindow& window) override;
 
 	virtual void move_down() noexcept override;

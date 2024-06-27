@@ -15,6 +15,8 @@ struct constants {
 	static constexpr float paddle_heigh{ 40.f };
 	static constexpr float brick_width{ 43.f };
 	static constexpr float brick_height{ 20.f };
+	static constexpr float delta_time_multiplier{ 70.f };
+	static constexpr float preferable_sounds_volume{ 35.f };
 	static constexpr float brick_offset{ brick_width / 2.f };
 	static constexpr int brick_HP{ 3 };
 	static constexpr int brick_columns{10};

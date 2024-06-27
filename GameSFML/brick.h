@@ -24,7 +24,7 @@ public:
 	void weaken() noexcept;
 	bool is_too_weak() const noexcept;
 
-	void update() override;
+	void update(float DeltaTime) override;
 	void draw(sf::RenderWindow& window) override;
 
 	float GetxA() const { return xA; }

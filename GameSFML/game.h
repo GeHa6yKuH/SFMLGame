@@ -98,13 +98,16 @@ public:
 	}
 
 	// Function to update all the entities
-	void update();
+	void update(float DeltaTime);
 
 	// Function to make all the entities draw themselves
 	void draw(sf::RenderWindow& window);
 };
 
 class game {
+
+private:
+
 	// Enum with allowed values for the game's state
 	enum class game_state { paused, game_over, running, player_wins };
 
@@ -146,6 +149,12 @@ class game {
 	class background gameBackground { 0.f, 0.f };
 
 	bool areAimingItemsDestroyed = false;
+
+	float CurrentTime = 0.f;
+
+	float LastTime = 0.f;
+
+	float TimeSinceLastFrame = 0.f;
 
 protected:
 

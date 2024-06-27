@@ -38,7 +38,7 @@ brick::brick(float x, float y)
 	sprite.setOrigin(get_centre());
 }
 
-void brick::update()
+void brick::update(float DeltaTime)
 {
 	if (brick_HP == 1)
 	{

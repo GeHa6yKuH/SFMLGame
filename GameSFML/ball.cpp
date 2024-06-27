@@ -19,6 +19,7 @@ ball::ball(float x, float y) : moving_entity() {
     if (s_buffer.loadFromFile("ball_bounces_paddle.wav"))
     {
         sound.setBuffer(s_buffer);
+        sound.setVolume(constants::preferable_sounds_volume);
     }
 
     // set initial velocity of the ball
@@ -44,12 +45,8 @@ void ball::move_down() noexcept {
 }
 
 // Compute the ball's new position
-void ball::update() {
+void ball::update(float DeltaTime) {
     // Move the position of the ball
-    if (!isFixed)
-    {
-        sprite.move(velocity);
-    }
 
     if (isFixed)
     {
@@ -83,6 +80,11 @@ void ball::update() {
         velocity.y = -velocity.y;
     if (y() > constants::window_height)
         destroy();
+
+    if (!isFixed)
+    {
+        sprite.move(velocity * DeltaTime * constants::delta_time_multiplier);
+    }
 }
 
 void ball::draw(sf::RenderWindow& window) {

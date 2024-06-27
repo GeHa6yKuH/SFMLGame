@@ -35,9 +35,9 @@ void entity_manager::clear() {
 }
 
 // Function to update all the entities
-void entity_manager::update() {
+void entity_manager::update(float DeltaTime) {
 	for (auto& e : all_entities)
-		e->update();
+		e->update(DeltaTime);
 }
 
 // Function to update make all the entities draw themselves
@@ -184,12 +184,18 @@ void game::run() {
 	// Was the pause key pressed in the last frame?
 	bool pause_key_active{ false };
 
+	sf::Clock gameFramesClock;
+
 	while (game_window.isOpen()) {
 		// Clear the screen
 		game_window.clear(sf::Color::Black);
 
 		// Check for any events since the last loop iteration
 		sf::Event event;
+
+		CurrentTime = gameFramesClock.getElapsedTime().asSeconds();
+		TimeSinceLastFrame = CurrentTime - LastTime;
+		LastTime = CurrentTime;
 
 		// If the user pressed "Escape", or clicked on "close", we close the window
 		// This will terminate the program
@@ -271,7 +277,6 @@ void game::run() {
 			if (lives <= 0)
 				state = game_state::game_over;
 
-			// todo: for all aiming items update xA if ball fixed, otherwise destroy all aimingItems if present
 			auto aimingItems = manager.get_all<aimItem>();
 
 			// Update the text for the number of remaining lives
@@ -282,14 +287,14 @@ void game::run() {
 
 			// In the paused state, the entities are not updated, only redrawn
 				// Calculate the updated graphics
-			manager.update();
+			manager.update(TimeSinceLastFrame);
 
 			/*float ball_x = gameBall.getXA();
 			float ball_y = gameBall.getYA();
 			auto ball_velocity = gameBall.getVelocity();
 			std::cout << "Ball Position: (" << ball_x << ", " << ball_y << ") Velocity: (" << ball_velocity.x << ", " << ball_velocity.y << ")\n";*/
 
-			gameBall.update();
+			gameBall.update(TimeSinceLastFrame);
 
 			// For every ball, call a function which
 			//    For every brick, call a function which

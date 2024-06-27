@@ -12,11 +12,13 @@ paddle::paddle(float x, float y) : moving_entity() {
     if (s_buffer.loadFromFile("ball_bounces_paddle.wav"))
     {
         sound.setBuffer(s_buffer);
+        sound.setVolume(constants::preferable_sounds_volume);
     }
 
     if (s_buffer1.loadFromFile("catch_bonus.wav"))
     {
         sound1.setBuffer(s_buffer1);
+        sound1.setVolume(constants::preferable_sounds_volume);
     }
 
     xA = x;
@@ -28,7 +30,7 @@ paddle::paddle(float x, float y) : moving_entity() {
     /*velocity = { constants::ball_speed, constants::ball_speed };*/
 }
 
-void paddle::update() {
+void paddle::update(float DeltaTime) {
     // Move the position of the ball
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left))
     {
@@ -45,7 +47,7 @@ void paddle::update() {
 
     if (!isFixed)
     {
-        sprite.move(velocity);
+        sprite.move(velocity * DeltaTime * constants::delta_time_multiplier);
     }
 }
 

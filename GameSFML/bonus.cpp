@@ -35,14 +35,15 @@ void bonus::move_left() noexcept {
     velocity.y = constants::ball_speed;
 }
 
-void bonus::update() {
+void bonus::update(float DeltaTime) {
     // Move the position of the ball
-    sprite.move(velocity);
 
     if (y() < 0)
         velocity.y = -velocity.y;
     if (y() > constants::window_height)
         destroy();
+
+    sprite.move(velocity * DeltaTime * constants::delta_time_multiplier);
 }
 
 void bonus::draw(sf::RenderWindow& window) {

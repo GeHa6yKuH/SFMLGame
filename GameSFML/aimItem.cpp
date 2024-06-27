@@ -25,7 +25,7 @@ aimItem::aimItem(float x, float y) : entity()
     sprite.setOrigin(get_centre());
 }
 
-void aimItem::update() 
+void aimItem::update(float DeltaTime) 
 {
 	switch (trInd) {
     case 0:
