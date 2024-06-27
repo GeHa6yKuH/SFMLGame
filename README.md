@@ -70,7 +70,7 @@ Here you can find a detailed explanation of setting up the game on Windows:
 ## Precompiled Binaries
 If you prefer not to build the game from source, you can download the precompiled binaries. This includes the executable, necessary DLLs, PDB, and images. The archive is compatible with Windows.
 
-[Precompiled binaries](https://drive.google.com/drive/folders/12mspVpEUJz5VmK6_5OgCSVkqb3XllLaf?usp=drive_link)
+[Precompiled binaries](https://drive.google.com/drive/folders/1Iq-mGIkgFK4fjqQj65Obs1msfC6S0_uS?usp=sharing)
 
 Feel free to explore, modify, and have fun with the game! If you encounter any issues or have suggestions, please open an issue or submit a pull request. Happy gaming!
 
